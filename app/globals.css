@@ -1,0 +1,357 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Delawala Marketing - "inbound lead generation instrument" theme.
+ * Deep ink sections for authority, cool-white paper sections for clarity,
+ * a single warm signal accent reserved for "win" moments, and a mono
+ * treatment tying labels/stats back to the local-search subject.
+ */
+:root {
+  /* Raw brand palette (see brief §3) */
+  --ink: #0c1c2c;
+  --ink-soft: #14293b;
+  --paper: #f6f8fa;
+  --brand-primary: #1b5bff;
+  --brand-primary-strong: #1340c9;
+  --signal: #f4b23c; /* signature warm accent - win moments only, <10% of UI */
+  --signal-strong: #e09a20;
+  --brand-success: #18a971;
+  --brand-text: #0e1b27;
+  --brand-muted: #56697b;
+  --brand-line: #e4e9ef;
+  --on-ink: #eaf1f8;
+  --on-ink-muted: #93a6b8;
+  --line-ink: rgba(255, 255, 255, 0.1);
+
+  /* Surfaces */
+  --background: var(--paper);
+  --foreground: var(--brand-text);
+  --card: #ffffff;
+  --card-foreground: var(--brand-text);
+  --popover: #ffffff;
+  --popover-foreground: var(--brand-text);
+
+  /* Primary action */
+  --primary: var(--brand-primary);
+  --primary-foreground: #ffffff;
+
+  /* Neutrals */
+  --secondary: #eaeff4;
+  --secondary-foreground: var(--brand-text);
+  --muted: #eef2f6;
+  --muted-foreground: var(--brand-muted);
+
+  /* Soft hover fill for menus/selects (kept neutral - the signal accent
+     is reserved for hero/guarantee/stat moments, not menu hover states) */
+  --accent: #eaf1fe;
+  --accent-foreground: var(--brand-primary-strong);
+
+  --success: var(--brand-success);
+  --success-foreground: #ffffff;
+  --success-subtle: rgba(24, 169, 113, 0.12);
+
+  --destructive: #d93025;
+  --destructive-foreground: #ffffff;
+
+  --border: var(--brand-line);
+  --input: var(--brand-line);
+  --ring: var(--brand-primary);
+
+  --chart-1: #1b5bff;
+  --chart-2: #4d7dff;
+  --chart-3: #18a971;
+  --chart-4: #f4b23c;
+  --chart-5: #93a6b8;
+
+  --radius: 0.625rem;
+
+  /* Sidebar (kept for shadcn compatibility; unused on the marketing page) */
+  --sidebar: #ffffff;
+  --sidebar-foreground: var(--brand-text);
+  --sidebar-primary: var(--brand-primary);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: var(--muted);
+  --sidebar-accent-foreground: var(--brand-text);
+  --sidebar-border: var(--brand-line);
+  --sidebar-ring: var(--brand-primary);
+
+  /* Layout constants */
+  --container-max: 1200px;
+  --section-py: clamp(4rem, 8vw, 8rem);
+}
+
+/* Dark theme (opt-in via `.dark` on a parent) - preserved for A/B testing */
+.dark {
+  --background: var(--ink);
+  --foreground: var(--on-ink);
+  --card: var(--ink-soft);
+  --card-foreground: var(--on-ink);
+  --popover: var(--ink-soft);
+  --popover-foreground: var(--on-ink);
+
+  --primary: #4d7dff;
+  --primary-foreground: #ffffff;
+
+  --secondary: var(--ink-soft);
+  --secondary-foreground: var(--on-ink);
+  --muted: var(--ink-soft);
+  --muted-foreground: var(--on-ink-muted);
+
+  --accent: var(--ink-soft);
+  --accent-foreground: var(--on-ink);
+
+  --success: #34caa0;
+  --success-foreground: #ffffff;
+  --success-subtle: rgba(52, 202, 160, 0.15);
+
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+
+  --border: var(--line-ink);
+  --input: var(--line-ink);
+  --ring: #4d7dff;
+
+  --sidebar: var(--ink);
+  --sidebar-foreground: var(--on-ink);
+  --sidebar-primary: #4d7dff;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: var(--ink-soft);
+  --sidebar-accent-foreground: var(--on-ink);
+  --sidebar-border: var(--line-ink);
+  --sidebar-ring: #4d7dff;
+}
+
+@theme inline {
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-success-subtle: var(--success-subtle);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Brand palette exposed directly for section-level utilities
+     (bg-ink, text-on-ink, bg-signal, border-line-ink, rounded-card, ...) */
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-paper: var(--paper);
+  --color-primary-strong: var(--brand-primary-strong);
+  --color-signal: var(--signal);
+  --color-signal-strong: var(--signal-strong);
+  --color-line: var(--brand-line);
+  --color-line-ink: var(--line-ink);
+  --color-on-ink: var(--on-ink);
+  --color-on-ink-muted: var(--on-ink-muted);
+
+  --radius-card: 1rem;
+  --radius-button: 0.625rem;
+  --radius-input: 0.625rem;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(12, 28, 44, 0.06);
+  --shadow-md: 0 10px 30px -12px rgba(12, 28, 44, 0.18);
+  --shadow-lg: 0 24px 60px -20px rgba(12, 28, 44, 0.28);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+  }
+}
+
+@layer utilities {
+  /* Type scale (brief §3) */
+  .text-display-h1 {
+    font-size: clamp(2.6rem, 5.5vw, 4.25rem);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+  .text-display-h2 {
+    font-size: clamp(1.9rem, 3.5vw, 2.75rem);
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    font-weight: 700;
+  }
+  .text-display-h3 {
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    font-weight: 600;
+  }
+  .text-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+  .text-stat {
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 4vw, 3.5rem);
+    font-weight: 700;
+  }
+  .text-stat-unit {
+    font-family: var(--font-mono);
+    color: var(--muted-foreground);
+  }
+
+  /* Clean white card with soft elevation on paper sections */
+  .glass-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+  }
+
+  :is(.dark) .glass-card {
+    background: var(--ink-soft);
+    border: 1px solid var(--line-ink);
+    box-shadow: none;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Readable prose styling for legal pages (privacy, terms) */
+.legal-prose h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+.legal-prose p {
+  color: var(--muted-foreground);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+.legal-prose ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  color: var(--muted-foreground);
+  margin-bottom: 1rem;
+}
+.legal-prose li {
+  margin-bottom: 0.4rem;
+  line-height: 1.6;
+}
+.legal-prose a {
+  color: var(--brand-primary-strong);
+  text-decoration: underline;
+}
+.legal-prose strong {
+  color: var(--foreground);
+  font-weight: 600;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Mobile toasts sit below the fixed header, not on the action bar.
+
+   components/ui/sonner.tsx flips the toaster to `top-center` below
+   1024px, because the MobileActionBar owns the bottom of the viewport
+   there. This clears the h-16 (64px) fixed header so the toast doesn't
+   cover the logo and menu button.
+
+   `!important` is required: Sonner writes these custom properties as
+   inline styles on the toaster element, which would otherwise win.
+
+   5rem = 80px puts the toast's top edge 15px below the 64px header.
+   Verified at 375x812: toast occupies 80-172px, clearing both the
+   header and the action bar at 719px.
+
+   Note: editing this file does not hot-reload under Turbopack here -
+   restart the dev server to see changes to these rules.
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 1023.98px) {
+  [data-sonner-toaster][data-y-position='top'] {
+    --offset-top: calc(5rem + env(safe-area-inset-top)) !important;
+    --mobile-offset-top: calc(5rem + env(safe-area-inset-top)) !important;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Wistia player placeholder.
+
+   The custom element has no layout until player.js registers it, so
+   without this the page reflows when the video pops in. This reserves
+   the 16:9 box and shows the blurred swatch in the meantime.
+
+   Only the structural half lives here. The swatch URL is per-video, so
+   components/ui/vsl-embed.tsx sets `background-image` inline. That
+   inline value outlives `:defined`, which is harmless - the player
+   paints over it, and the blur drops away with this rule.
+   ───────────────────────────────────────────────────────────── */
+wistia-player:not(:defined) {
+  display: block;
+  padding-top: 56.25%;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  filter: blur(5px);
+}
