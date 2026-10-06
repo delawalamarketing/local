@@ -4,17 +4,12 @@ import { SITE } from '@/lib/site-config'
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
-      // Default rule for all crawlers
+      // Default rule for all crawlers. /_next/ must stay crawlable: it serves
+      // the CSS, fonts and JS Google needs to render the page.
       {
         userAgent: '*',
         allow: '/',
-        disallow: [
-          '/private/',
-          '/api/',
-          '/admin/',
-          '/thank-you',
-          '/_next/',
-        ],
+        disallow: ['/api/'],
       },
       // Explicitly welcome AI crawlers (for AEO / LLM citations).
       {

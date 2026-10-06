@@ -55,10 +55,12 @@ Wistia's `player.js` itself, so the scripts load only where a video is shown.
 
 ## Deploying (one-time setup)
 
-1. **Vercel:** create a new project from `delawalamarketing/local`. Framework
-   preset is Next.js, the package manager is pnpm, and the build settings stay at
-   their defaults. Then add the domain `local.delawalamarketing.com` under
-   Settings → Domains.
+1. **Vercel:** create a new project from `delawalamarketing/local`. The package
+   manager is pnpm and the build settings stay at their defaults. The Framework
+   Preset is pinned to Next.js in `vercel.json`, so it builds as Next.js even if
+   the dashboard says "Other". Without that, the build succeeds but every page
+   returns Vercel's `404 NOT_FOUND`. Then add the domain
+   `local.delawalamarketing.com` under Settings → Domains.
 2. **Cloudflare DNS** (the `delawalamarketing.com` zone): add a `CNAME` record
    from `local` to `cname.vercel-dns.com`. Set the proxy status to **DNS only**
    (grey cloud) so Vercel can issue the SSL certificate.
@@ -66,5 +68,9 @@ Wistia's `player.js` itself, so the scripts load only where a video is shown.
    if you want Clarity. The rest only need setting to override a default.
 4. **Analytics:** turn on Web Analytics and Speed Insights in the new Vercel
    project. The components are already in `app/layout.tsx`.
+5. **Redeploy** after steps 3 and 4 (Deployments → ⋯ → Redeploy on the latest
+   production deployment). `NEXT_PUBLIC_*` values are baked in at build time,
+   and the Analytics and Speed Insights scripts only load on a deployment made
+   after those features were turned on.
 
 Pushes to `main` deploy to production.

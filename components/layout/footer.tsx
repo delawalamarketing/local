@@ -16,7 +16,7 @@ type FooterLink = {
 
 const footerLinks: FooterLink[] = [
   { href: '#process', label: 'How it works' },
-  { href: '#pricing', label: 'The Offer & Pricing' },
+  { href: '/#pricing', label: 'The Offer & Pricing', route: true },
   { href: '#faq', label: 'FAQ' },
   { href: mainSite('/case-studies'), label: 'Case Studies', route: true },
   { href: mainSite('/blog'), label: 'Blog', route: true },
