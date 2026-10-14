@@ -71,7 +71,7 @@ export async function POST(req: NextRequest) {
 
   if (!result.ok) {
     console.warn(
-      `[vsl-lead] formspree failed: reason=${result.reason} status=${result.status ?? ''}`,
+      `[vsl-lead] formspree failed: form=${FORMSPREE_URL} reason=${result.reason} status=${result.status ?? ''} detail=${result.detail ?? ''}`,
     )
     return NextResponse.json(
       { ok: false, error: 'Submission failed. Please try again.' },

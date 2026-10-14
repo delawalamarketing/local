@@ -1,6 +1,12 @@
 export type FormspreeResult =
   | { ok: true }
-  | { ok: false; reason: 'http-error' | 'timeout' | 'network-error'; status?: number }
+  | {
+      ok: false
+      reason: 'http-error' | 'timeout' | 'network-error'
+      status?: number
+      /** Formspree's error body, e.g. which setting rejected the submission. */
+      detail?: string
+    }
 
 /** POSTs a submission to a Formspree form endpoint (https://formspree.io/f/...). */
 export async function postToFormspree(
@@ -18,7 +24,8 @@ export async function postToFormspree(
       signal: AbortSignal.timeout(10000),
     })
     if (!response.ok) {
-      return { ok: false, reason: 'http-error', status: response.status }
+      const detail = (await response.text().catch(() => '')).slice(0, 500)
+      return { ok: false, reason: 'http-error', status: response.status, detail }
     }
     return { ok: true }
   } catch (err) {
