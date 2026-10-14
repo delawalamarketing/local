@@ -83,7 +83,7 @@ export async function POST(req: NextRequest) {
 
   if (!result.ok) {
     console.warn(
-      `[lead] formspree failed: reason=${result.reason} status=${result.status ?? ''}`,
+      `[lead] formspree failed: form=${FORMSPREE_GBP_APPLY_URL} reason=${result.reason} status=${result.status ?? ''} detail=${result.detail ?? ''}`,
     )
     return NextResponse.json(
       { ok: false, error: 'Submission failed. Please try again.' },
